@@ -1,0 +1,16 @@
+package views
+
+import (
+	"pi_dash/src/device/types"
+	comps "pi_dash/src/views/components"
+	"pi_dash/src/views/partials"
+)
+
+templ DashPage(data *device.Data) {
+	@views.Html() {
+		@views.Sidebar()
+		<main class="container" hx-ext="ws" ws-connect="/ws">
+			@comps.DeviceData(data)
+		</main>
+	}
+}

@@ -1,0 +1,56 @@
+package views
+
+templ Sidebar() {
+	<aside class="d-flex">
+		<div class="list-group sidebar bg-body-secondary border shadow">
+			<a href="#" class="list-group-item list-group-item-action" aria-current="true">
+				Home
+			</a>
+		</div>
+		<div class="d-flex align-items-start gap-2 ms-2">
+			<button id="theme-toggle-btn" class="btn">
+				<i class="fa-solid fa-moon"></i>
+			</button>
+		</div>
+	</aside>
+	<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const them_toggle_button = document.querySelector('#theme-toggle-btn');
+            const them_toggle_button_i = them_toggle_button.querySelector('i');
+
+            if (!sessionStorage.getItem("theme")) {
+                sessionStorage.setItem("theme", "dark");
+            } else {
+                switch (sessionStorage.getItem("theme")) {
+                    case "light":
+                        document.body.setAttribute("data-bs-theme", "light");
+                        them_toggle_button_i.classList.remove("fa-moon");
+                        them_toggle_button_i.classList.add("fa-sun");
+                        break;
+                    case "dark":
+                        document.body.setAttribute("data-bs-theme", "dark");
+                        them_toggle_button_i.classList.remove("fa-sun");
+                        them_toggle_button_i.classList.add("fa-moon");
+                        break;
+                }
+            }
+
+            them_toggle_button.addEventListener("click", () => {
+                switch (sessionStorage.getItem("theme")) {
+                    case "dark":
+                        document.body.setAttribute("data-bs-theme", "light");
+                        them_toggle_button_i.classList.remove("fa-moon");
+                        them_toggle_button_i.classList.add("fa-sun");
+                        sessionStorage.setItem("theme", "light");
+                        break;
+                    case "light":
+                        document.body.setAttribute("data-bs-theme", "dark");
+                        them_toggle_button_i.classList.remove("fa-sun");
+                        them_toggle_button_i.classList.add("fa-moon");
+                        sessionStorage.setItem("theme", "dark");
+                        break;
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.sidebar {
+  width: 150px;
+  height: 100svh;
+}
