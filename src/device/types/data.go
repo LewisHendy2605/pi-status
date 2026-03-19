@@ -4,13 +4,11 @@ import (
 	"fmt"
 	"math"
 	"os"
-	"runtime"
 	"time"
 
 	"github.com/shirou/gopsutil/v4/cpu"
 	"github.com/shirou/gopsutil/v4/mem"
 	"github.com/shirou/gopsutil/v4/sensors"
-	"github.com/yusufpapurcu/wmi"
 )
 
 type Data struct {
@@ -56,27 +54,6 @@ func NewData() (*Data, error) {
 
 func (d *Data) String() string {
     return fmt.Sprintf(`{Hostname: %s, Temp: %f, TotalCpuUsage: %f}`, d.Hostname, d.Temp, d.CpuUsage)
-}
-
-func getCPUTemp() float64 {
-	if runtime.GOOS == "windows" {
-		var zones []ThermalZone
-		err := wmi.Query("SELECT CurrentTemperature FROM MSAcpi_ThermalZoneTemperature", &zones)
-		if err != nil || len(zones) == 0 {
-			println(err.Error())
-			return 0
-		}
-		return float64(zones[0].CurrentTemperature)/10 - 273.15
-	}
-
-	// Linux / Raspberry Pi
-	b, err := os.ReadFile("/sys/class/thermal/thermal_zone0/temp")
-	if err != nil {
-		return 0
-	}
-	var temp float64
-	fmt.Sscanf(string(b), "%f", &temp)
-	return temp / 1000
 }
 
 // converts bytes to KB, MB, GB, etc.

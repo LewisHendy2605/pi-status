@@ -29,7 +29,7 @@ func main() {
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		device_data, err := device.NewData()
 		if err != nil {
-			http.Error(w, "Internal Server Erorr", http.StatusInternalServerError)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			return
 		}
 		views.DashPage(device_data).Render(r.Context(), w)
