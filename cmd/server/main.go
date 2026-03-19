@@ -38,7 +38,7 @@ func main() {
 	r.Get("/ws", func(w http.ResponseWriter, r *http.Request) {
 		_, err := ws.NewClient(ws_server, w, r)
 		if err != nil {
-			http.Error(w, "Failed handling web socket connection: "+err.Error(), http.StatusInternalServerError)
+			log.Println("WS error:", err)
 			return
 		}
 	})

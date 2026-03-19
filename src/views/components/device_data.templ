@@ -1,6 +1,9 @@
 package views
 
-import device "pi_dash/src/device/types"
+import (
+	"fmt"
+	device "pi_dash/src/device/types"
+)
 
 templ DeviceData(data *device.Data) {
 	<div id="device-data-container">
@@ -20,7 +23,7 @@ templ DeviceData(data *device.Data) {
 			<div class="card bg-body-secondary border shadow" style="width: 14rem;">
 				<div class="card-body">
 					<h5 class="card-title">Ram</h5>
-					<p class="card-text m-0">{ data.Ram.UsedPercent }%</p>
+					<p class="card-text m-0">{ fmt.Sprintf("%.0f", data.Ram.UsedPercent) }%</p>
 					<meter class="w-100 mb-2" id="meter" value={ data.Ram.UsedPercent / 100 }></meter>
 					<p class="card-text">Total: { device.FormatBytes(data.Ram.Total) }</p>
 					<p class="card-text">Available: { device.FormatBytes(data.Ram.Available) }</p>

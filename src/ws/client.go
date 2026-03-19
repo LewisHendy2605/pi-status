@@ -37,7 +37,8 @@ func NewClient(server *Server, w http.ResponseWriter, r *http.Request) (*Client,
 
 	host, port, err := net.SplitHostPort(r.RemoteAddr)
 	if err != nil {
-		return nil, err
+		host = r.RemoteAddr
+    	port = ""
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
