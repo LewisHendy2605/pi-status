@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"log"
 
 	device "pi_dash/src/device/types"
 	views "pi_dash/src/views/pages"
